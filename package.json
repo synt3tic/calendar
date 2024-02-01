@@ -12,7 +12,6 @@
 		"@vuepic/vue-datepicker": "^7.4.1",
 		"downloadjs": "^1.4.7",
 		"html-to-image": "^1.11.11",
-		"node-html-to-image": "^4.0.0",
 		"vue": "^3.3.11"
 	},
 	"devDependencies": {

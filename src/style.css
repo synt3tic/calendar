@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@100;200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 :root {
 	font-family: Inter;
@@ -39,6 +40,7 @@ button {
 	color: white;
 
 	transition: all 0.15s ease-in-out;
+	font-family: 'Montserrat', sans-serif;
 }
 
 button:active {

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
+import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import { toPng } from 'html-to-image'
 //@ts-ignore
 import download from 'downloadjs'
-import nodeHtmlToImage from 'node-html-to-image'
 
 const content = ref<HTMLElement>()
 const isEdit = ref(true)
@@ -91,15 +89,22 @@ const buttonsVisible = ref(true)
 const saveImage = async () => {
 	buttonsVisible.value = false
 
-	nextTick(async () => {
-		if (content.value) {
-			const img = await toPng(content.value)
+	setTimeout(() => {
+		buttonsVisible.value = true
+	}, 7000)
 
-			await download(img, 'image.png')
+	// nextTick(async () => {
+	// 	if (content.value) {
+	// 		const img = await toPng(content.value, {
+	// 			imagePlaceholder:
+	// 				'https://media.discordapp.net/attachments/1021492073880371370/1202684450878791691/photo_2024-01-20_22-37-00.jpg?ex=65ce5a2d&is=65bbe52d&hm=52b0f1c3b4f52b37c35734bc3ead9daf3718896b0626ea7bb388c86d0b9c63d6&=&format=webp&width=487&height=866'
+	// 		})
 
-			buttonsVisible.value = true
-		}
-	})
+	// 		await download(img, 'image.png')
+
+	// 		buttonsVisible.value = true
+	// 	}
+	// })
 }
 </script>
 
@@ -146,11 +151,6 @@ const saveImage = async () => {
 		class="content"
 		ref="content"
 	>
-		<img
-			src="/bg.jpg"
-			alt="w"
-			class="content__bg"
-		/>
 		<div class="content__wrapper">
 			<div class="content__header">
 				<p>ДАТА</p>
@@ -221,25 +221,16 @@ const saveImage = async () => {
 }
 
 .content {
-	position: relative;
-	object-fit: cover;
 	height: 100%;
-
-	&__bg {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-	}
+	background-image: url('/bg.JPEG');
 
 	&__wrapper {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		width: 100%;
-		backdrop-filter: blur(16px);
-		padding: 1rem;
+		padding: 2rem;
+		padding-top: 6rem;
 
 		:last-child {
 			margin-top: auto;
@@ -248,11 +239,16 @@ const saveImage = async () => {
 
 	&__header {
 		font-family: 'Alumni Sans', sans-serif;
+		font-weight: 100;
 		font-size: 60px;
 		color: white;
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
+
+		:first-child {
+			letter-spacing: 2px;
+		}
 	}
 
 	.cards {
@@ -271,14 +267,14 @@ const saveImage = async () => {
 			.image {
 				display: flex;
 				flex-direction: column;
-				gap: 16px;
-				padding: 16px;
+				padding: 8px;
 				background-color: white;
-				border-radius: 4px;
-				min-width: 128px;
-				width: 128px;
+				border-radius: 8px;
+				min-width: 94px;
+				width: 94px;
+				height: 94px;
 
-				font-family: 'Montserrat', sans-serif;
+				font-family: 'Roboto', sans-serif;
 
 				&__week {
 					color: rgb(168, 0, 0);
@@ -288,17 +284,18 @@ const saveImage = async () => {
 
 				&__day {
 					color: black;
-					font-size: 48px;
+					font-size: 32px;
 				}
 			}
 
 			.times {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: end;
 				align-items: center;
 				width: 100%;
 				gap: 8px;
-				font-family: 'Montserrat', sans-serif;
+				font-family: 'Roboto', sans-serif;
 				font-size: 24px;
 				margin: 0;
 				margin-left: 24px;
