@@ -1,0 +1,8 @@
+{
+  "name": "my-ionic-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "e03acaaf"
+}
