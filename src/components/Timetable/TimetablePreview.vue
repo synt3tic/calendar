@@ -109,6 +109,7 @@ const saveImage = async () => {
 <style scoped lang="scss">
 .content {
 	height: 100dvh;
+	overflow-y: scroll;
 	background-image: url('/bg.JPEG');
 
 	&__wrapper {

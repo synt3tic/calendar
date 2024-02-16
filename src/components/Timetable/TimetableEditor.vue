@@ -3,25 +3,20 @@ import TimetableDate from './TimetableDate.vue'
 import { DateItem } from '../../types/timetableTypes'
 import UiButton from '../UI/UiButton.vue'
 import { ref } from 'vue'
+import { klona } from 'klona/lite'
 
 interface Emit {
 	(emit: 'save', dates: DateItem[]): void
 }
 
-const emit = defineEmits<Emit>()
+interface Props {
+	dates: DateItem[]
+}
 
-const dates = ref<DateItem[]>([
-	{
-		id: 1,
-		date: new Date().toISOString(),
-		times: [
-			{
-				id: 1,
-				time: new Date().toISOString()
-			}
-		]
-	}
-])
+const emit = defineEmits<Emit>()
+const props = defineProps<Props>()
+
+const dates = ref<DateItem[]>(klona(props.dates))
 
 const addTime = (id: number) => {
 	const date = dates.value.find((el) => el.id === id)
@@ -96,6 +91,7 @@ const removeTime = (dateId: number, timeId: number) => {
 <style scoped lang="scss">
 .timetable {
 	height: 100dvh;
+	overflow-y: scroll;
 	padding: 36px 16px 16px;
 	display: flex;
 	flex-direction: column;

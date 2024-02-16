@@ -21,6 +21,7 @@
 		"@ionic/vue-router": "^7.0.0",
 		"downloadjs": "^1.4.7",
 		"ionicons": "^7.0.0",
+		"klona": "^2.0.6",
 		"vue": "^3.2.45",
 		"vue-router": "^4.1.6"
 	},

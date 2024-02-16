@@ -6,7 +6,18 @@ import { IonApp } from '@ionic/vue'
 import { DateItem } from './types/timetableTypes'
 
 const isEdit = ref(true)
-const selectedDates = ref<DateItem[]>([])
+const selectedDates = ref<DateItem[]>([
+	{
+		id: 1,
+		date: new Date().toISOString(),
+		times: [
+			{
+				id: 1,
+				time: new Date().toISOString()
+			}
+		]
+	}
+])
 
 const onSave = (dates: DateItem[]) => {
 	selectedDates.value = dates
@@ -17,6 +28,7 @@ const onSave = (dates: DateItem[]) => {
 <template>
 	<ion-app>
 		<timetable-editor
+			:dates="selectedDates"
 			v-if="isEdit"
 			@save="onSave"
 		/>
