@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TimetableDate from './TimetableDate.vue'
-import { DateItem } from '../../types/timetableTypes'
+import { DateItem } from '@/types/timetableTypes'
 import UiButton from '../UI/UiButton.vue'
 import { ref } from 'vue'
 import { klona } from 'klona/lite'
@@ -23,18 +23,18 @@ const addTime = (id: number) => {
 
 	if (date) {
 		date.times.push({
-			id: date.times.length + 1,
+			id: new Date().getMilliseconds(),
 			time: new Date().toISOString()
 		})
 	}
 }
 const addDate = () => {
 	dates.value.push({
-		id: dates.value.length + 1,
+		id: new Date().getMilliseconds(),
 		date: new Date().toISOString(),
 		times: [
 			{
-				id: 1,
+				id: new Date().getMilliseconds(),
 				time: new Date().toISOString()
 			}
 		]
@@ -64,21 +64,31 @@ const removeTime = (dateId: number, timeId: number) => {
 		findedDate.times = findedDate.times.filter((el) => el.id !== timeId)
 	}
 }
+
+const onRemoveDate = (id: number) => {
+    dates.value = dates.value.filter(date => date.id !== id);
+}
 </script>
 
 <template>
 	<div class="timetable">
-		<timetable-date
-			v-for="date in dates"
-			:key="date.id"
-			:date="date"
-			@select-date="editDate"
-			@select-time="editTime"
-			@add-time="addTime"
-			@remove-time="removeTime"
-		/>
+        <transition-group class="timetable__list" name="list" tag="ul">
+            <li
+                v-for="date in dates"
+                :key="date.id"
+            >
+                <timetable-date
+                    :date="date"
+                    @select-date="editDate"
+                    @select-time="editTime"
+                    @add-time="addTime"
+                    @remove-time="removeTime"
+                    @remove-date="onRemoveDate"
+                />
+            </li>
+            <ui-button @click="addDate" style="width: 100%">Добавить дату</ui-button>
+        </transition-group>
 
-		<ui-button @click="addDate">Добавить дату</ui-button>
 		<ui-button
 			@click="emit('save', dates)"
 			style="margin-top: auto"
@@ -93,8 +103,31 @@ const removeTime = (dateId: number, timeId: number) => {
 	height: 100dvh;
 	overflow-y: scroll;
 	padding: 36px 16px 16px;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+    display: flex;
+    flex-direction: column;
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.3s ease-in-out;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+    position: absolute;
 }
 </style>

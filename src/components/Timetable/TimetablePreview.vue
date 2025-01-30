@@ -36,7 +36,8 @@ const getWeek = (date: string) => {
 
 const getDay = (date: string) => {
 	return new Date(date).toLocaleString('ru', {
-		day: 'numeric'
+		day: 'numeric',
+        month: 'numeric',
 	})
 }
 
@@ -47,7 +48,7 @@ const getTime = (date: string) => {
 	})
 }
 
-const saveImage = async () => {
+const saveImage = () => {
 	buttonsVisible.value = false
 
 	setTimeout(() => {
@@ -61,11 +62,16 @@ const saveImage = async () => {
 		class="content"
 		ref="content"
 	>
+        <img class="content__logo" src="/logo.png" alt="logo" />
+
+        <div class="content__text"><b>Свободные интервалы</b> на электроэпиляцию и ознакомительный сеанс</div>
+
 		<div class="content__wrapper">
 			<div class="content__header">
 				<p>ДАТА</p>
 				<p>ВРЕМЯ</p>
 			</div>
+
 			<div class="cards">
 				<div
 					v-for="card in dates"
@@ -85,6 +91,7 @@ const saveImage = async () => {
 					</div>
 				</div>
 			</div>
+
 			<div
 				v-if="buttonsVisible"
 				style="display: flex; gap: 16px; width: 100%"
@@ -108,17 +115,48 @@ const saveImage = async () => {
 
 <style scoped lang="scss">
 .content {
+    display: flex;
+    flex-direction: column;
 	height: 100dvh;
 	overflow-y: scroll;
-	background-image: url('/bg.JPEG');
+    background: url("/background.png") bottom;
+    background-size: 100%;
+
+    &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(.25rem) brightness(.5);
+    }
+
+    &__logo {
+        z-index: 1;
+        width: 60%;
+        margin: 2rem auto 0;
+    }
+
+    &__text {
+        padding: 1rem 1rem 0;
+        z-index: 1;
+        font-size: 1.1rem;
+        line-height: 1.4rem;
+        font-weight: 200;
+        text-align: center;
+        text-wrap: balance;
+
+        b {
+            font-weight: 600;
+            color: #e1d4c4;
+        }
+    }
 
 	&__wrapper {
+        z-index: 1;
+        flex: 1;
 		display: flex;
 		flex-direction: column;
-		height: 100%;
 		width: 100%;
-		padding: 2rem;
-		padding-top: 6rem;
+		padding: 1rem 2rem;
 
 		:last-child {
 			margin-top: auto;
@@ -142,8 +180,8 @@ const saveImage = async () => {
 	.cards {
 		display: flex;
 		flex-direction: column;
-		margin-top: 36px;
-		gap: 24px;
+		margin-top: 1.5rem;
+		gap: 1rem;
 		width: 100%;
 
 		&__item {
@@ -158,9 +196,9 @@ const saveImage = async () => {
 				padding: 8px;
 				background-color: white;
 				border-radius: 8px;
-				min-width: 94px;
-				width: 94px;
-				height: 94px;
+				min-width: 22.5vw;
+				width: 22.5vw;
+				height: 22.5vw;
 
 				font-family: 'Roboto', sans-serif;
 
@@ -173,7 +211,7 @@ const saveImage = async () => {
 
 				&__day {
 					color: black;
-					font-size: 32px;
+					font-size: 1.5rem;
 				}
 			}
 
@@ -186,8 +224,7 @@ const saveImage = async () => {
 				gap: 8px;
 				font-family: 'Roboto', sans-serif;
 				font-size: 24px;
-				margin: 0;
-				margin-left: 24px;
+				margin: 0 0 0 1.5rem;
 
 				color: white;
 			}
