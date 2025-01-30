@@ -24,6 +24,7 @@ const selectDate = (event: CustomEvent) => {
 		@click.self="emit('cancel')"
 	>
 		<ion-datetime
+            :first-day-of-week="1"
 			:value="date"
 			:presentation="format"
 			show-default-buttons

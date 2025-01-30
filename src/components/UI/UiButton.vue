@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+withDefaults(defineProps<{
+    color: 'default' | 'red';
+}>(), { color: 'default' });
+
+</script>
 
 <template>
-	<button class="button"><slot /></button>
+	<button class="button" :class="`button_${color}`"><slot /></button>
 </template>
 
 <style scoped lang="scss">
@@ -26,5 +32,9 @@
 			border-color: #646cff;
 		}
 	}
+
+    &_red {
+        background-color: #8c3838;
+    }
 }
 </style>

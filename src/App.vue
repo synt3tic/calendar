@@ -5,18 +5,18 @@ import TimetablePreview from './components/Timetable/TimetablePreview.vue'
 import { IonApp } from '@ionic/vue'
 import { DateItem } from './types/timetableTypes'
 
-const isEdit = ref(true)
+const isEdit = ref(true);
 const selectedDates = ref<DateItem[]>([
 	{
-		id: 1,
+		id: new Date().getMilliseconds(),
 		date: new Date().toISOString(),
 		times: [
 			{
-				id: 1,
+				id: new Date().getMilliseconds(),
 				time: new Date().toISOString()
 			}
 		]
-	}
+	},
 ])
 
 const onSave = (dates: DateItem[]) => {
@@ -28,14 +28,14 @@ const onSave = (dates: DateItem[]) => {
 <template>
 	<ion-app>
 		<timetable-editor
+            v-if="isEdit"
 			:dates="selectedDates"
-			v-if="isEdit"
 			@save="onSave"
 		/>
 		<timetable-preview
+            v-else
 			:dates="selectedDates"
 			@edit="isEdit = true"
-			v-else
 		/>
 	</ion-app>
 </template>
