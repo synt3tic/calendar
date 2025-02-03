@@ -196,9 +196,9 @@ const saveImage = () => {
 				padding: 8px;
 				background-color: white;
 				border-radius: 8px;
-				min-width: 22.5vw;
-				width: 22.5vw;
-				height: 22.5vw;
+				min-width: 25.5vw;
+				width: 25.5vw;
+				height: 25.5vw;
 
 				font-family: 'Roboto', sans-serif;
 
