@@ -131,16 +131,16 @@ const saveImage = () => {
 
     &__logo {
         z-index: 1;
-        width: 60%;
-        margin: 2rem auto 0;
+        width: 45%;
+        margin: 3rem auto 0;
     }
 
     &__text {
         padding: 1rem 1rem 0;
         z-index: 1;
-        font-size: 1.1rem;
-        line-height: 1.4rem;
-        font-weight: 200;
+        font-size: 0.85rem;
+        line-height: 1.2;
+        font-weight: 400;
         text-align: center;
         text-wrap: balance;
 
@@ -166,7 +166,7 @@ const saveImage = () => {
 	&__header {
 		font-family: 'Alumni Sans', sans-serif;
 		font-weight: 100;
-		font-size: 40px;
+		font-size: 2rem;
 		color: white;
 		width: 100%;
 		display: flex;
@@ -180,7 +180,7 @@ const saveImage = () => {
 	.cards {
 		display: flex;
 		flex-direction: column;
-		margin-top: 1.5rem;
+		margin-top: 1rem;
 		gap: 1rem;
 		width: 100%;
 
